@@ -36,7 +36,7 @@ La salida por pantalla muestra lo siguiente:
 * `cc`: Son las componentes conexas que se han calculado, usando los arcos sin dirección.
 * `cfc`: Son las componentes fuertemente conexas que se han calculado, teniendo en cuando la dirección de los arcos.
 
-> Para ejecutar en modo **DEBUG**: `ruby debug.rb data/grafo1.txtx`.
+> Para ejecutar en modo **DEBUG**: `ruby debug.rb PATH/TO/FILE`.
 
 ## 2.4 Ejemplo grafo1
 
