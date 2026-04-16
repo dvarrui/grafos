@@ -20,7 +20,7 @@ Empezamos conrextualizando un poco de teoría y luego pasamos a la práctica.
 * En un **grafos dirigidos** el arco tiene una dirección (un sentido). Se representa con una flecha (ej. 1 -> 2). 
 * En un **grafos no dirigidos** la relación es bidireccional; si 1 está conectado con 2, se asume que 2 también lo está con 1.
 
-## 1.2 Calcular las componenentes conexas
+## 1.2 Calcular las componentes conexas
 
 **Componentes Conexas (Grafos No Dirigidos)**: En un grafo no dirigido, una componente conexa (CC) es un grupo de nodos donde cualquier par de ellos está conectado por un camino.
 
