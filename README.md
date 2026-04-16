@@ -35,7 +35,7 @@ Algoritmos:
 
 # 2. Práctica
 
-## 2.1 Fichero de entrada
+## 2.1 Ficheros de entrada
 
 * [Ejemplos](./data/) de ficheros de entrada.
 
@@ -47,6 +47,8 @@ Los ficheros de entrada, son ficheros de texto plano con el siguiente formato:
     - El primer número N1 es el identificador del nodo de donde parte el arco. El origen del arco.
     - En segundo número N2 es el identifcador del nodo hacia donde se dirige el arco. El destino del arco.
 * Aunque en el fichero de entrada los arcos se definen con dirección. Internamente en la implementación, tendremos en cuenta o no la dirección de los arcos según nos interese en cada momento.
+
+## 2.2 Ejemplo `data/grafo2.txt`
 
 * Contenido del fichero `data/grafo1.txt`:
 
@@ -68,6 +70,7 @@ graph TD
     4 --> 6((6))
     7((7))
 ```
+
 
 # 2.2 Programa
 
@@ -110,7 +113,36 @@ La salida por pantalla es la siguiente:
 * `cc`: Son las componentes conexas que se han calculado, usando los arcos sin dirección.
 * `cfc`: Son las componentes fuertemente conexas que se han calculado, teniendo en cuando la dirección de los arcos.
 
-## 2.3 Estructura del programa
+## 2.2 Ejemplo `data/grafo2.txt`
+
+* Contenido del fichero `data/grafo1.txt`:
+
+```text
+7
+1 2
+2 3
+4 5
+4 6
+```
+
+* Esquema del grafo:
+
+```mermaid
+graph TD
+    1((1)) --> 2((2))
+    2 --> 3((3))
+    4((4)) --> 5((5))
+    4 --> 6((6))
+    7((7))
+```
+
+# 3. El programa **cangoto**
+
+Este programa se basa en la estructura de datos `cangotos[]` para calcular las `cc`y las `cfc`.
+
+La estructura de datos `cangotos[i]`, establece para un nodo `i`, cuáles son los nodos a los que se puede llegar avanzando los por arcos (aristas) teniendo en cuanta su dirección (o sentido).
+
+## 3.1 Estructura del programa
 
 Ficheros del proyecto:
 
@@ -137,13 +169,13 @@ grafo
 * `lib/calculate.rb`: Define los métodos que realizan los cálculos.
 * `debug.rb`: es igual que `main.rb`, pero muestra más información por pantalla.
 
-## 2.4 Debug
+## 3.2 Debug
 
 Si ejecutamos el programa `debug.rb`con un grafo veremos que por pantalla aparce algo más llamado `cangotos`. Esta información se calcula internamente como un paso previo al cálculos de los `cc` y los `cfc`.
 
 La variable `cangotos`, representa para cada nodo N el subconjunto de todos los nodos a los que se puede llegar avanzando por los arcos (aristas) teniendo en cuenta se sentido.
 
-Por ejemplo:
+## 3.3 Ejemplo `data/grafo1.txt`
 
 ```bash
 $ ruby ./debug.rb data/grafo1.txt
@@ -186,3 +218,35 @@ Avanzando por los arcos dirigidos, tenemos que:
 * Desde los nodos 5, 6 y 7, no llegamos a ningún nodo.
 
 > NOTA: Esta información de los `cangotos[i]`, nos será muy útil para calcular los `cc` y los `cfc` de forma sencilla.
+
+## 3.4 Ejemplo `data/grafo2.txt`
+
+```
+$ ./debug.rb data/grafo2.txt 
+Graph (filename: data/grafo2.txt)
+  > nodes (7)
+  > arcs  (5)
+    | 1 --> 2
+    | 2 --> 3
+    | 3 --> 1
+    | 4 --> 5
+    | 4 --> 6
+  > cangotos:
+    | node 1 -> 2, 3
+    | node 2 -> 3, 1
+    | node 3 -> 1, 2
+    | node 4 -> 5, 6
+    | node 5 -> 
+    | node 6 -> 
+    | node 7 -> 
+  > cc  (3)
+    | cc  1 ==> [1, 2, 3]
+    | cc  2 ==> [4, 5, 6]
+    | cc  3 ==> [7]
+  > cfc (5)
+    | cfc 1 ==> [1, 2, 3]
+    | cfc 2 ==> [4]
+    | cfc 3 ==> [5]
+    | cfc 4 ==> [6]
+    | cfc 5 ==> [7]
+```
