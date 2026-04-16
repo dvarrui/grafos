@@ -58,7 +58,7 @@ Necesitamos tener Ruby instalado en nuestro equipo para ejecutar el programa.
 * En Debian: `sudo apt install ruby`.
 * Windows: https://rubyinstaller.org/. 
 
-# 2.3 Ejecución
+## 2.3 Ejecución
 
 * `ruby main.rb data/grafo1.txtx`, para ejecutar el programa con los datos del fichero `data/grafo1.txt`.
 
