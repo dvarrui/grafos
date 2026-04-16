@@ -8,6 +8,8 @@ A partir de un grafo y sus arcos, vamos a calcular:
 
 Vamos a usar perspectiva didáctica, usando el lenguaje de programación Ruby.
 
+---
+
 1. [Teoría](./docs/1-teoria.md)
     * 1.1 Definiciones
     * 1.2 Calcular las componentes conexas
