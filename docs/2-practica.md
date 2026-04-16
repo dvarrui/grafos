@@ -16,7 +16,7 @@ Los ficheros de entrada, son ficheros de texto plano con el siguiente formato:
     - En segundo número N2 es el identifcador del nodo hacia donde se dirige el arco. El destino del arco.
 * Aunque en el fichero de entrada los arcos se definen con dirección. Internamente en la implementación, tendremos en cuenta o no la dirección de los arcos según nos interese en cada momento.
 
-# 2.2 Instalación
+## 2.2 Instalación
 
 Necesitamos tener Ruby instalado en nuestro equipo para ejecutar el programa.
 
