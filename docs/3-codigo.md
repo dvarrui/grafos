@@ -36,11 +36,53 @@ grafo
 
 ## 3.2 Debug
 
-Si ejecutamos el programa `debug.rb`con un grafo veremos que por pantalla aparce algo más llamado `cangotos`. Esta información se calcula internamente como un paso previo al cálculos de los `cc` y los `cfc`.
+Si ejecutamos el programa `debug.rb`con un grafo vemos ahora se muestra además una sección llamada "cangotos". Esta información se calcula internamente como un paso previo al cálculo de las componentes conexas (`cc`) y de las componentes fuertemente conexas (`cfc`).
 
-La variable `cangotos`, representa para cada nodo N el subconjunto de todos los nodos a los que se puede llegar avanzando por los arcos (aristas) teniendo en cuenta se sentido.
+La variable `cangotos`, representa para cada nodo N, el subconjunto de todos los nodos, a los que se puede llegar avanzando por los arcos (aristas) siguiendo el sentido (dirección) de los arcos.
 
-## 3.3 Debug: ejemplo grafo1
+A parir de esta información se puede calcular:
+
+* `cc`: con 8 líneas de código no recursivo (método `calculate_cc()`).
+* `cfc`: con 13 líneas de código no recursivo (método `calculata_cfc()`).
+
+## 3.3 Calcular CC
+
+```ruby
+def calculate_cc
+  @cc = []
+  frees = @nodes.dup
+  @nodes.each do |node|
+    next unless frees.include? node
+
+    component = [node] + @cangotos[node]
+    frees -= component
+    @cc << component
+  end
+end
+```
+
+## 3.4 Calcular CFC
+
+```ruby
+  def calculate_cfc
+    @cfc = []
+    frees = @nodes.dup
+    @nodes.each do |node1|
+      next unless frees.include? node1
+
+      component = [node1]
+      @cangotos[node1].each do |node2|
+        if @cangotos[node2].include?(node1)
+          component << node2
+          frees -= component
+        end
+      end
+      @cfc << component
+    end
+  end
+```
+
+## 3.5 Debug: ejemplo grafo1
 
 * Ejecutar el ejemplo en modo "debug":
 
@@ -86,7 +128,7 @@ La información que devuelve `cangotos` indica que si avanzamos por los arcos di
 
 > NOTA: Esta información de los `cangotos[i]`, nos será muy útil para calcular los `cc` y los `cfc` de forma sencilla.
 
-## 3.4 Debug: ejemplo grafo2
+## 3.6 Debug: ejemplo grafo2
 
 * Ejecutar el ejemplo en modo "debug":
 

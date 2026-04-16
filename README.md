@@ -22,5 +22,7 @@ Vamos a usar perspectiva didáctica, usando el lenguaje de programación Ruby.
 3. [El algoritmo **can-go-to**](./docs/3-codigo.md)
     * 3.1 Estructura del programa
     * 3.2 Debug
-    * 3.3 Debug: ejemplo grafo1
-    * 3.4 Debug: ejemplo grafo2
+    * 3.3 Calcular CC
+    * 3.4 Calcular CFC
+    * 3.5 Debug: ejemplo grafo1
+    * 3.6 Debug: ejemplo grafo2

@@ -1,12 +1,12 @@
 
 module CalculateGraph
   def calculate
-    calculate_reaches
+    calculate_cangotos
     calculate_cc
     calculate_cfc
   end
 
-  def calculate_reaches
+  def calculate_cangotos
     @cangotos = []
     @nodes.each do |node|
       @cangotos[node] = calculate_cangotos_node(node, [], [node])
@@ -29,6 +29,7 @@ module CalculateGraph
     frees = @nodes.dup
     @nodes.each do |node|
       next unless frees.include? node
+
       component = [node] + @cangotos[node]
       frees -= component
       @cc << component
