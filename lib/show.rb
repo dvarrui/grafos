@@ -1,5 +1,9 @@
 
 module ShowGraph
+  def debug
+    show(:debug)
+  end
+
   def show(mode=:default)
     puts "Graph (filename: #{@filename})"
     puts "  > nodes (#{@nodes.size})"

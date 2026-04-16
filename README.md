@@ -121,6 +121,7 @@ grafo
 │   ├── graph.rb
 │   ├── load.rb
 │   └── show.rb
+├── debug.rb
 └── main.md
 ```
 
@@ -134,4 +135,54 @@ grafo
 * `lib/load.rb`: Define los métodos para cargar el contenido del fichero.
 * `lib/show.rb`: Define los métodos que muestran los datos por pantalla.
 * `lib/calculate.rb`: Define los métodos que realizan los cálculos.
+* `debug.rb`: es igual que `main.rb`, pero muestra más información por pantalla.
 
+## 2.4 Debug
+
+Si ejecutamos el programa `debug.rb`con un grafo veremos que por pantalla aparce algo más llamado `cangotos`. Esta información se calcula internamente como un paso previo al cálculos de los `cc` y los `cfc`.
+
+La variable `cangotos`, representa para cada nodo N el subconjunto de todos los nodos a los que se puede llegar avanzando por los arcos (aristas) teniendo en cuenta se sentido.
+
+Por ejemplo:
+
+```bash
+$ ruby ./debug.rb data/grafo1.txt
+
+Graph (filename: data/grafo1.txt)
+  > nodes (7)
+  > arcs  (4)
+    | 1 --> 2
+    | 2 --> 3
+    | 4 --> 5
+    | 4 --> 6
+  > cangotos:
+    | node 1 -> 2, 3
+    | node 2 -> 3
+    | node 3 -> 
+    | node 4 -> 5, 6
+    | node 5 -> 
+    | node 6 -> 
+    | node 7 -> 
+  > cc  (3)
+    | cc  1 ==> [1, 2, 3]
+    | cc  2 ==> [4, 5, 6]
+    | cc  3 ==> [7]
+  > cfc (7)
+    | cfc 1 ==> [1]
+    | cfc 2 ==> [2]
+    | cfc 3 ==> [3]
+    | cfc 4 ==> [4]
+    | cfc 5 ==> [5]
+    | cfc 6 ==> [6]
+    | cfc 7 ==> [7]
+```
+
+Avanzando por los arcos dirigidos, tenemos que: 
+
+* Desde el nodo 1, podemos llegar (`can go to`) a los nodos 2 y 3.
+* Desde el nodo 2, podemos llegar al nodos 3.
+* Desde el nodo 3, no llegamos a ningún nodo.
+* Desde el nodo 4, podemos llegar (`can go to`) a los nodos 5 y 6.
+* Desde los nodos 5, 6 y 7, no llegamos a ningún nodo.
+
+> NOTA: Esta información de los `cangotos[i]`, nos será muy útil para calcular los `cc` y los `cfc` de forma sencilla.
