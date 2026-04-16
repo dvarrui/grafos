@@ -3,7 +3,7 @@
 
 # 1. Teoría
 
-Empezamos conrextualizando un poco de teoría y luego pasamos a la práctica.
+Empezamos con un poco de teoría y luego pasamos a la práctica.
 
 ## 1.1 Definiciones
 
