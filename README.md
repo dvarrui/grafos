@@ -6,9 +6,11 @@ A partir de un grafo y sus arcos, vamos a calcular:
 * las **componentes conexas** del grafo si los arcos se consideran no dirigidos
 * las **componentes fuertemente conexas** de un grafo si los arcos se consideran dirigidos
 
-Vamos a usar perspectiva didáctica, usando el lenguaje de programación Ruby
+Vamos a usar perspectiva didáctica, usando el lenguaje de programación Ruby.
 
 # 1. Teoría
+
+Empezamos conrextualizando un poco de teoría y luego pasamos a la práctica.
 
 ## 1.1 Definiciones
 
@@ -18,15 +20,15 @@ Vamos a usar perspectiva didáctica, usando el lenguaje de programación Ruby
 * En un **grafos dirigidos** el arco tiene una dirección (un sentido). Se representa con una flecha (ej. 1 -> 2). 
 * En un **grafos no dirigidos** la relación es bidireccional; si 1 está conectado con 2, se asume que 2 también lo está con 1.
 
-## 1.2 Algoritmos
+## 1.2 Calcular las componenentes conexas
 
 **Componentes Conexas (Grafos No Dirigidos)**: En un grafo no dirigido, una componente conexa (CC) es un grupo de nodos donde cualquier par de ellos está conectado por un camino.
 
-* Algoritmos: Búsqueda en Anchura (BFS) o Profundidad (DFS)
+Algoritmos:
 
-**Componentes Fuertemente Conexas (Grafos Dirigidos)**
+* Búsqueda en Anchura (BFS) o Profundidad (DFS)
 
-En los grafos dirigidos, una componente fuertemente conexa (CFC) es un grupo de nodos donde, para cada par `(u,v)`, existe un camino de `u` a `v` y también de `v` a `u`.
+**Componentes Fuertemente Conexas (Grafos Dirigidos)**: En los grafos dirigidos, una componente fuertemente conexa (CFC) es un grupo de nodos donde, para cada par `(u,v)`, existe un camino de `u` a `v` y también de `v` a `u`.
 
 Algoritmos:
 
@@ -48,7 +50,24 @@ Los ficheros de entrada, son ficheros de texto plano con el siguiente formato:
     - En segundo número N2 es el identifcador del nodo hacia donde se dirige el arco. El destino del arco.
 * Aunque en el fichero de entrada los arcos se definen con dirección. Internamente en la implementación, tendremos en cuenta o no la dirección de los arcos según nos interese en cada momento.
 
-## 2.2 Ejemplo `data/grafo2.txt`
+# 2.2 Ejecución
+
+> **REQUISITO**: Necesitamos tener Ruby instalado en nuestro equipo para ejecutar el programa.
+>
+> * `sudo apt install`, en Debian.
+> * `sudo zypper install`, emn OpenSUSE.
+
+* `ruby main.rb data/grafo1.txtx`, para ejecutar el programa con los datos del fichero `data/grafo1.txt`.
+
+La salida por pantalla muestra lo siguiente:
+
+* `filename`: El nombre del fichero de entrada.
+* `nodes`: El número de nodos del grafo.
+* `arcs`: Son los arcos del fichero de entrada.
+* `cc`: Son las componentes conexas que se han calculado, usando los arcos sin dirección.
+* `cfc`: Son las componentes fuertemente conexas que se han calculado, teniendo en cuando la dirección de los arcos.
+
+## 2.3 Ejemplo grafo1
 
 * Contenido del fichero `data/grafo1.txt`:
 
@@ -71,15 +90,7 @@ graph TD
     7((7))
 ```
 
-
-# 2.2 Programa
-
-> **REQUISITO**: Necesitamos tener Ruby instalado en nuestro equipo para ejecutar el programa.
->
-> * `sudo apt install`, en Debian.
-> * `sudo zypper install`, emn OpenSUSE.
-
-* Ejecutar el programa para el fichero `data/grafo1.txt`:
+* Ejecutar el programa con los datos del fichero `data/grafo1.txt`:
 
 ```bash
 $ ruby main.rb data/grafo1.txt 
@@ -105,22 +116,15 @@ Graph (filename: data/grafo1.txt)
     | cfc 7 ==> [7]
 ```
 
-La salida por pantalla es la siguiente:
+## 2.4 Ejemplo grafo2
 
-* `filename`: El nombre del fichero de entrada.
-* `nodes`: El número de nodos del grafo.
-* `arcs`: Son los arcos del fichero de entrada.
-* `cc`: Son las componentes conexas que se han calculado, usando los arcos sin dirección.
-* `cfc`: Son las componentes fuertemente conexas que se han calculado, teniendo en cuando la dirección de los arcos.
-
-## 2.2 Ejemplo `data/grafo2.txt`
-
-* Contenido del fichero `data/grafo1.txt`:
+* Contenido del fichero `data/grafo2.txt`:
 
 ```text
 7
 1 2
 2 3
+3 1
 4 5
 4 6
 ```
@@ -131,12 +135,69 @@ La salida por pantalla es la siguiente:
 graph TD
     1((1)) --> 2((2))
     2 --> 3((3))
+    3 --> 1
     4((4)) --> 5((5))
     4 --> 6((6))
     7((7))
 ```
 
-# 3. El programa **cangoto**
+* Ejecutamos el programa con los datso del grafo:
+
+```bash
+$ ruby main.rb data/grafo2.txt 
+Graph (filename: data/grafo2.txt)
+  > nodes (7)
+  > arcs  (5)
+    | 1 --> 2
+    | 2 --> 3
+    | 3 --> 1
+    | 4 --> 5
+    | 4 --> 6
+  > cc  (3)
+    | cc  1 ==> [1, 2, 3]
+    | cc  2 ==> [4, 5, 6]
+    | cc  3 ==> [7]
+  > cfc (5)
+    | cfc 1 ==> [1, 2, 3]
+    | cfc 2 ==> [4]
+    | cfc 3 ==> [5]
+    | cfc 4 ==> [6]
+    | cfc 5 ==> [7]
+```
+
+* Salida con depuración:
+
+```bash
+$ ruby debug.rb data/grafo2.txt 
+Graph (filename: data/grafo2.txt)
+  > nodes (7)
+  > arcs  (5)
+    | 1 --> 2
+    | 2 --> 3
+    | 3 --> 1
+    | 4 --> 5
+    | 4 --> 6
+  > cangotos:
+    | node 1 -> 2, 3
+    | node 2 -> 3, 1
+    | node 3 -> 1, 2
+    | node 4 -> 5, 6
+    | node 5 -> 
+    | node 6 -> 
+    | node 7 -> 
+  > cc  (3)
+    | cc  1 ==> [1, 2, 3]
+    | cc  2 ==> [4, 5, 6]
+    | cc  3 ==> [7]
+  > cfc (5)
+    | cfc 1 ==> [1, 2, 3]
+    | cfc 2 ==> [4]
+    | cfc 3 ==> [5]
+    | cfc 4 ==> [6]
+    | cfc 5 ==> [7]
+```
+
+# 3. El algoritmo con **can-go-to**
 
 Este programa se basa en la estructura de datos `cangotos[]` para calcular las `cc`y las `cfc`.
 
