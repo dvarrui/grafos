@@ -23,7 +23,7 @@ module ShowGraph
   def show_cangotos
     return if @cangotos.size.zero?
 
-    puts "  > cangotos:"
+    puts "  > cangotos (#{@cangotos.count})"
     @cangotos.each_with_index do |value, index|
       puts "    | node #{index} -> #{value.join(', ')}" unless value.nil?
     end
