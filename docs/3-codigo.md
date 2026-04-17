@@ -34,7 +34,7 @@ grafo
 * `lib/show.rb`: Define los métodos que muestran los datos por pantalla.
 * `lib/calculate.rb`: Define los métodos que realizan los cálculos.
 * `debug.rb`: es igual que `main.rb`, pero muestra más información por pantalla.
-* `test/`: en esta carpeta tenemos los tests. Para ejecutar todos los test hacemos `ruby test/all_tests.rb`.
+* `test/`: en esta carpeta tenemos los tests. Para ejecutar todos los test podemos ejecutar el comando `rake` o el fichero principal `ruby test/all_tests.rb`.
 
 ## 3.2 Debug
 
