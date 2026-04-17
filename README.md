@@ -13,31 +13,30 @@ Vamos a usar perspectiva didáctica, usando el lenguaje de programación Ruby.
 * Ejecutar el programa:
 
 ```bash
-$ ruby main.rb data/grafo1.txt
+$ ruby main.rb data/grafo2.txt
 ```
 
 * Salida por pantalla:
 
 ```
-Graph (filename: data/grafo1.txt)
+Graph (filename: data/grafo2.txt)
   > nodes (7)
-  > arcs  (4)
+  > arcs  (5)
     | 1 --> 2
     | 2 --> 3
+    | 3 --> 1
     | 4 --> 5
     | 4 --> 6
   > cc  (3)
     | cc  1 ==> [1, 2, 3]
     | cc  2 ==> [4, 5, 6]
     | cc  3 ==> [7]
-  > cfc (7)
-    | cfc 1 ==> [1]
-    | cfc 2 ==> [2]
-    | cfc 3 ==> [3]
-    | cfc 4 ==> [4]
-    | cfc 5 ==> [5]
-    | cfc 6 ==> [6]
-    | cfc 7 ==> [7]
+  > cfc (5)
+    | cfc 1 ==> [1, 2, 3]
+    | cfc 2 ==> [4]
+    | cfc 3 ==> [5]
+    | cfc 4 ==> [6]
+    | cfc 5 ==> [7]
 ```
 
 ## Documentación
