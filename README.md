@@ -8,7 +8,39 @@ A partir de un grafo y sus arcos, vamos a calcular:
 
 Vamos a usar perspectiva didáctica, usando el lenguaje de programación Ruby.
 
----
+## Modo de uso
+
+* Ejecutar el programa:
+
+```bash
+$ ruby main.rb data/grafo1.txt
+```
+
+* Salida por pantalla:
+
+```
+Graph (filename: data/grafo1.txt)
+  > nodes (7)
+  > arcs  (4)
+    | 1 --> 2
+    | 2 --> 3
+    | 4 --> 5
+    | 4 --> 6
+  > cc  (3)
+    | cc  1 ==> [1, 2, 3]
+    | cc  2 ==> [4, 5, 6]
+    | cc  3 ==> [7]
+  > cfc (7)
+    | cfc 1 ==> [1]
+    | cfc 2 ==> [2]
+    | cfc 3 ==> [3]
+    | cfc 4 ==> [4]
+    | cfc 5 ==> [5]
+    | cfc 6 ==> [6]
+    | cfc 7 ==> [7]
+```
+
+## Documentación
 
 1. [Teoría](./docs/1-teoria.md)
     * 1.1 Definiciones
