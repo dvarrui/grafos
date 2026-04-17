@@ -8,7 +8,7 @@ class Graph
   include ShowGraph
 
   attr_reader :filename, :nodes, :arcs
-  attr_reader :cangotos
+  attr_reader :cangotos, :cc, :cfc
 
   def initialize
     @cangotos = []
